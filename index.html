@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urban Gear HR</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {margin:0; font-family:'Poppins',sans-serif; background:#f2f2f2; color:#222;}
+    header {background:black; padding:20px 30px; text-align:center;}
+    .logo {height:60px; display:block; margin:0 auto;}
+    h1 {font-weight:700; font-size:2.5rem; margin-bottom:10px;}
+    h2 {font-weight:600; font-size:2rem; margin-bottom:15px;}
+    p, li {line-height:1.6;}
+    .text-card {background:white; padding:25px; border-radius:15px; margin:20px auto; max-width:800px; box-shadow:0 4px 15px rgba(0,0,0,0.1);}
+    #kategorije {text-align:center; padding:40px 20px;}
+    .grid {display:flex; flex-wrap:wrap; justify-content:center; gap:15px;}
+    .scrollable {display:flex; overflow-x:auto; gap:15px; padding-bottom:10px;}
+    .scrollable::-webkit-scrollbar {height:6px;}
+    .scrollable::-webkit-scrollbar-thumb {background:#444; border-radius:3px;}
+    .kat {background:black; color:white; padding:15px 25px; border-radius:25px; text-decoration:none; font-weight:600; cursor:pointer; transition:0.3s;}
+    .kat:hover {background:#444;}
+    .proizvodi {display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:30px;}
+    .proizvod {background:white; padding:20px; border-radius:15px; box-shadow:0 4px 15px rgba(0,0,0,0.1); max-width:260px; text-align:center; transition:0.2s;}
+    .proizvod:hover {transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.2);}
+    .proizvod img {width:100%; border-radius:10px; margin-bottom:10px; cursor:pointer;}
+    .proizvod h3 {font-weight:600; margin-bottom:5px;}
+    .btn {padding:10px 15px; background:black; color:white; text-decoration:none; border-radius:10px; font-weight:600; cursor:pointer; margin:5px;}
+    .btn:hover {background:#444;}
+    #vrati-se {margin:20px auto; display:block;}
+    .modal {display:none; position:fixed; z-index:999; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.7);}
+    .modal-content {background:white; margin:60px auto; padding:20px; border-radius:15px; max-width:800px; display:flex; gap:20px; position:relative;}
+    .modal-content img {width:50%; border-radius:10px;}
+    .modal-text {flex:1;}
+    .modal-content .close {position:absolute; top:10px; right:20px; font-size:28px; font-weight:bold; cursor:pointer;}
+    @media(max-width:768px){.proizvodi{flex-direction:column; align-items:center;} .text-card{max-width:90%;} .modal-content{flex-direction:column;} .modal-content img{width:100%;}}
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Logo.jpg" alt="Urban Gear HR" class="logo">
+    <h1>Urban Gear HR</h1>
+  </header>
+
+  <!-- Uvod / O nama -->
+  <section id="uvod">
+    <div class="text-card">
+      <p>Nudimo najtraženije streetwear proizvode – vrhunske kvalitete po odličnim cijenama.</p>
+      <p>Prodajemo proizvode koji su trenutno dostupni odmah, a ako trenutno nema dostupnog odmah, i dalje se može naručiti sve što želite. Dostava traje 2-3 tjedna.</p>
+      <p>Prodajemo i puno drugih patika i streetwear proizvoda koji možda nisu prikazani na stranici – slobodno pitajte!</p>
+    </div>
+  </section>
+
+  <!-- Kategorije -->
+  <section id="kategorije">
+    <h2>Kategorije</h2>
+    <div class="grid scrollable">
+      <a class="kat" onclick="showCategory('yeezy')">Yeezy 350</a>
+      <a class="kat" onclick="showCategory('tn')">Nike Air Max TN</a>
+      <a class="kat" onclick="showCategory('jordan4')">Nike Air Jordan 4 Retro</a>
+      <a class="kat" onclick="showCategory('airforce')">Nike Air Force 1</a>
+      <a class="kat" onclick="showCategory('offwhiteforce')">Off White Air Force 1</a>
+      <a class="kat" onclick="showCategory('offwhiteout')">Off White Out Of Office</a>
+      <a class="kat" onclick="showCategory('dunklow')">Off White Dunk Low Lot 38</a>
+      <a class="kat" onclick="showCategory('courthigh')">Off White Court High 3.0</a>
+      <a class="kat" onclick="showCategory('trapstar')">Trapstar</a>
+      <a class="kat" onclick="showCategory('techfleece')">Tech Fleece</a>
+      <a class="kat" onclick="showCategory('tnf')">TNF</a>
+	  <a class="kat" onclick="showCategory('louisvuitton')">Louis Vuitton</a>
+    </div>
+  </section>
+
+  <!-- Dostupno odmah -->
+  <section id="dostupno">
+    <div class="text-card">
+      <h2 style="text-align:center;">Dostupno odmah</h2>
+      <div id="dostupni-proizvodi">
+        <p style="text-align:center;">Trenutno nema dostupnih proizvoda odmah, ali sve se može naručiti – dostava 2-3 tjedna.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zašto kupovati kod nas -->
+  <section id="prednosti">
+    <div class="text-card">
+      <h2>Zašto kupovati kod nas?</h2>
+      <ul>
+        <li>Niže cijene od drugih trgovaca, uz provjereno bolju kvalitetu</li>
+        <li>Moguća dostava po cijeloj Hrvatskoj</li>
+        <li>Plaćanje putem PayPala ili prilikom preuzimanja</li>
+        <li>Povrat u roku od 3 dana – paket ne smije biti oštećen i etikete ne smiju biti uklonjene</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Proizvodi / Dinamički sadržaj -->
+  <section id="proizvodi-sekcija"></section>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <img id="modal-img" src="" alt="">
+      <div class="modal-text">
+        <h3 id="modal-ime"></h3>
+        <p id="modal-cijena"></p>
+        <p id="modal-dostava"></p>
+        <div class="btn-group">
+          <a id="modal-wa" href="#" target="_blank" class="btn">WhatsApp</a>
+          <a id="modal-ig" href="#" target="_blank" class="btn">Instagram</a>
+        </div>
+        <p>Naručite odmah</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kontakt -->
+  <section id="kontakt">
+    <div class="text-card">
+      <h2>Kontakt</h2>
+      <p>Kliknite na željeni kanal za narudžbu ili pitanja:</p>
+      <div class="btn-group">
+        <a href="https://wa.me/3850919819291" target="_blank" class="btn">WhatsApp</a>
+        <a href="https://www.instagram.com/urbangearhr" target="_blank" class="btn">Instagram</a>
+        <a href="https://www.tiktok.com/@urbangearhr" target="_blank" class="btn">TikTok</a>
+        <a href="https://www.snapchat.com/add/urbangearhr" target="_blank" class="btn">Snapchat</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Urban Gear HR</p>
+  </footer>
+
+  <script>
+const products = {
+  yeezy: [
+    {img:'BelugaV2.jpg', ime:'Yeezy 350 Beluga V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'Black.jpg', ime:'Yeezy 350 Black V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'3.jpg', ime:'Yeezy 350 Dazzling Blue', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'4.jpg', ime:'Yeezy 350 Static V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'5.jpg', ime:'Yeezy 350 Salt', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'6.jpg', ime:'Yeezy 350 Tail Light V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'7.jpg', ime:'Yeezy 350 Yecheil V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'8.jpg', ime:'Yeezy 350 Steel Grey V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'9.jpg', ime:'Yeezy 350 V2 Beluga 2.0', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'CoreBlackRed.jpg', ime:'Yeezy 350 Core Black Red V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'10.jpg', ime:'Yeezy 350 Dark Salt V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'11.jpg', ime:'Yeezy 350 Zebra V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'CarbonBeluga.jpg', ime:'Yeezy 350 Carbon Beluga V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'12.jpg', ime:'Yeezy 350 Frozen Yellow', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'13.jpg', ime:'Yeezy 350 Cream White V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'14.jpg', ime:'Yeezy 350 Black Red V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'15.jpg', ime:'Yeezy 350 Blue Tint V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'16.jpg', ime:'Yeezy 350 Onyx V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'17.jpg', ime:'Yeezy 350 Slate V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'18.jpg', ime:'Yeezy 350 MX Oat V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'19.jpg', ime:'Yeezy 350 Bone V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'20.jpg', ime:'Yeezy 350 MX Rock V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'21.jpg', ime:'Yeezy 350 Static', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'22.jpg', ime:'Yeezy 350 Carbon V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'23.jpg', ime:'Yeezy 350 Antlia V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'24.jpg', ime:'Yeezy 350 Mono Clay', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'25.jpg', ime:'Yeezy 350 Zyon V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'26.jpg', ime:'Yeezy 350 Sand Taupe V2', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'}
+  ],
+
+  tn: [
+    {img:'tn1.jpg', ime:'TN Triple Black', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn2.jpg', ime:'TN Barselona', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn3.jpg', ime:'TN Batman', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn4.jpg', ime:'TN Black Silver', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn5.jpg', ime:'TN Berlin', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn6.jpg', ime:'TN Voltage Purple', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn7.jpg', ime:'TN Triple White', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn8.jpg', ime:'TN Black Gradient', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn9.jpg', ime:'TN Dracula', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn10.jpg', ime:'TN Paris Saint Germain', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn11.jpg', ime:'TN France', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn12.jpg', ime:'TN Swoosh', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn13.jpg', ime:'TN Brazil', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn14.jpg', ime:'TN Sky Blue', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn15.jpg', ime:'TN Bred', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn16.jpg', ime:'TN Blue White', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn17.jpg', ime:'TN Summer Gradient', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn18.jpg', ime:'TN Lacoste', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn19.jpg', ime:'TN White Red', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn20.jpg', ime:'TN Anniversary', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn21.jpg', ime:'TN Shark Attack', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn22.jpg', ime:'TN Sunset', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn23.jpg', ime:'TN Greedy', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn24.jpg', ime:'TN Killer Whale', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn25.jpg', ime:'TN Marseille', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn26.jpg', ime:'TN Black Volt', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn27.jpg', ime:'TN Camouflage', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn28.jpg', ime:'TN Lemon-Lime', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn29.jpg', ime:'TN White Pink', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn30.jpg', ime:'TN Wolf Grey', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'tn31.jpg', ime:'TN Black University', cijena:'100 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850917308621', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'tn32.jpg', ime:'TN III Hyper Blue', cijena:'110 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'}
+  ],
+
+  jordan4: [
+    {img:'j1.jpg', ime:'Jordan 4 Red Thunder', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'j2.jpg', ime:'Jordan 4 Blue Thunder', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'j5.jpg', ime:'Jordan 4 White Cement', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'j3.jpg', ime:'Jordan 4 Fire Red', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'j4.jpg', ime:'Jordan 4 Thunder', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'jb.jpg', ime:'Jordan 4 Black Cat', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'j6.jpg', ime:'Jordan 4 Wet Cement', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'j7.jpg', ime:'Jordan 4 University Blue', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'j8.jpg', ime:'Jordan 4 White Thunder', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'j9.jpg', ime:'Jordan 4 Canyon Purple', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'j10.jpg', ime:'Jordan 4 Military Blue', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'j11.jpg', ime:'Jordan 4 Frozen Moments', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'j12.jpg', ime:'Jordan 4 PSG', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'j13.jpg', ime:'Jordan 4 Pink Oreo', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'j14.jpg', ime:'Jordan 4 Pure Money', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'j15.jpg', ime:'Jordan 4 Orchid', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'j16.jpg', ime:'Jordan 4 White and Gold', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'j17.jpg', ime:'Off-White Jordan 4 Bred', cijena:'130 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'j18.jpg', ime:'Jordan 4 Neon', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+    {img:'j19.jpg', ime:'Jordan 4 Pink Thunder', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'}
+  ],
+
+  airforce: [
+    {img:'af1.jpg', ime:'Air Force 1 White', cijena:'95 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'}
+  ],
+  
+  offwhiteforce: [
+    {img:'af1bb.jpg', ime:'Off White Air Force 1 Blue', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'af1black.jpg', ime:'Off White Air Force 1 Black', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'af1s.jpg', ime:'Off White Air Force 1 Shadow White', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'af1l.jpg', ime:'Off White Air Force 1 Volt', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'af1b.jpg', ime:'Off White Air Force 1 MoMA', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'af1y.jpg', ime:'Off White Air Force 1 University Gold', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'af1g.jpg', ime:'Off White Air Force 1 Brooklyn', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'}
+  ],
+  
+  offwhiteout: [
+    {img:'q.jpg', ime:'Off White Out Of Office White', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'w.jpg', ime:'Off White Out Of Office White Light Blue', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'e.jpg', ime:'Off White Out Of Office Light Blue', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'r.jpg', ime:'Off White Out Of Office Grey', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'t.jpg', ime:'Off White Out Of Office White Black', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'z.jpg', ime:'Off White Out Of Office White Orange', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'u.jpg', ime:'Off White Out Of Office White Red', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'i.jpg', ime:'Off White Out Of Office White Green', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'o.jpg', ime:'Off White Out Of Office White Pink', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'p.jpg', ime:'Off White Out Of Office Black', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'š.jpg', ime:'Off White Out Of Office White Blue', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'đ.jpg', ime:'Off White Out Of Office Blue', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'a.jpg', ime:'Off White Out Of Office Grey Black', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'s.jpg', ime:'Off White Out Of Office Black Yellow', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'d.jpg', ime:'Off White Out Of Office White Grey', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'f.jpg', ime:'Off White Out Of Office Dark Blue', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'g.jpg', ime:'Off White Out Of Office White Red Black', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'}
+  ],
+  
+  dunklow: [
+    {img:'lot38.jpg', ime:'Off White Dunk Low Lot 38', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'}
+  ],
+  
+  courthigh: [
+    {img:'court.jpg', ime:'Off White Court High 3.0', cijena:'145 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'}
+  ],
+  
+  trapstar: [
+    {img:'TrapstarZ.jpg', ime:'Trapstar Zenska Jakna', cijena:'130 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'TrapstarG.jpg', ime:'Trapstar Jakna', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'Trapstar.jpg', ime:'Trapstar Jakna', cijena:'130 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'}
+  ],
+  
+  techfleece: [
+    {img:'TFC.jpg', ime:'Tech Fleece Crni', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'TFB.jpg', ime:'Tech Fleece Crni', cijena:'120 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'}
+  ],
+  
+  tnf: [
+    {img:'TNF.jpg', ime:'The North Face Prsluci-više boja', cijena:'110 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'}
+  ],
+  
+  louisvuitton: [
+    {img:'lvb.jpg', ime:'Louis Vuitton Black White', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'lvbb.jpg', ime:'Louis Vuitton Black', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'lvg.jpg', ime:'Louis Vuitton Grey White', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'},
+	{img:'lvp.jpg', ime:'Louis Vuitton Blue White', cijena:'135 €', dostava:'Dostava: 2-3 tjedna', wa:'https://wa.me/3850919819291', ig:'https://www.instagram.com/urbangearhr'}
+  ]
+    };
+
+    function showCategory(cat){
+      document.getElementById('uvod').style.display='none';
+      document.getElementById('kategorije').style.display='none';
+      document.getElementById('dostupno').style.display='none';
+      document.getElementById('prednosti').style.display='none';
+
+      const section = document.getElementById('proizvodi-sekcija');
+      section.innerHTML = `<h2 style="text-align:center;">${getCategoryFullName(cat)}</h2><div class="proizvodi"></div><button id="vrati-se" class="btn" onclick="vratiSe()">Vrati se na početnu</button>`;
+      const grid = section.querySelector('.proizvodi');
+      if(products[cat].length===0){
+        grid.innerHTML = `<p style="text-align:center;">Trenutno nema proizvoda, ali sve se može naručiti – dostava 2-3 tjedna.</p>`;
+      } else {
+        products[cat].forEach(p=>{
+          const div = document.createElement('div');
+          div.classList.add('proizvod');
+          div.innerHTML = `<img src="${p.img}" alt="${p.ime}" onclick="openModal('${p.img}','${p.ime}','${p.cijena}','${p.dostava}','${p.wa}','${p.ig}')">
+                           <h3>${p.ime}</h3>
+                           <p>${p.cijena}</p>`;
+          grid.appendChild(div);
+        });
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function vratiSe(){
+      document.getElementById('uvod').style.display='block';
+      document.getElementById('kategorije').style.display='block';
+      document.getElementById('dostupno').style.display='block';
+      document.getElementById('prednosti').style.display='block';
+      document.getElementById('proizvodi-sekcija').innerHTML='';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function getCategoryFullName(cat){
+      const names = {
+        yeezy:"Yeezy 350", tn:"Nike Air Max TN", jordan4:"Nike Air Jordan 4 Retro",
+        airforce:"Nike Air Force 1", offwhiteforce:"Off White Air Force 1",
+        offwhiteout:"Off White Out Of Office", dunklow:"Off White Dunk Low Lot 38",
+        courthigh:"Off White Court High 3.0", trapstar:"Trapstar",
+        techfleece:"Tech Fleece", tnf:"TNF", louisvuitton:"Louis Vuitton"
+      };
+      return names[cat]||cat;
+    }
+
+    function openModal(img, ime, cijena, dostava, wa, ig){
+      document.getElementById('modal-img').src=img;
+      document.getElementById('modal-ime').innerText=ime;
+      document.getElementById('modal-cijena').innerText=cijena;
+      document.getElementById('modal-dostava').innerText=dostava;
+      document.getElementById('modal-wa').href=wa;
+      document.getElementById('modal-ig').href=ig;
+      document.getElementById('modal').style.display='flex';
+    }
+
+    function closeModal(){document.getElementById('modal').style.display='none';}
+    window.onclick=function(event){if(event.target==document.getElementById('modal')){closeModal();}}
+  </script>
+</body>
+</html>
